@@ -2,11 +2,13 @@
 <html>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   <body>
-    <h1>
+  <table border=".5em" >
+  <th>Commits</th>
         {{#commits}}
-            * {{message}}<br>
+        <tr>
+            <td> <a href="/home/commit?hash={{id}}">{{message}} </a></td>
+        </tr>
         {{/commits}}
-    </h1>
-
+  </table>
   </body>
 </html>
