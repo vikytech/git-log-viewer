@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{ message }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
   <body>
-    <h1>{{ message }}</h1>
-    <p>{{ message }}</p>
+    <h1>
+        {{#commits}}
+            * {{message}}<br>
+        {{/commits}}
+    </h1>
+
   </body>
 </html>

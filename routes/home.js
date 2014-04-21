@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
+var git = require('../git.js');
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('home', { message: 'Welcome to home' });
+router.get('/', function (req, res) {
+    git.getCommits(function (result, commits) {
+        console.log(commits[0]);
+        res.render('home', { commits: commits});
+    });
 });
 
 module.exports = router;

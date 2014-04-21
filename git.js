@@ -1,9 +1,8 @@
-var git;
+var git = require('gift');
+var repo = git("/Users/vikytech/Copy/Git/Java/forum");
 
-git = require('gift');
-
-repo = git("/Users/vikytech/Copy/Git/Js/gitLogViewer");
-repo.commits("master", 30, function (err, commits) {
-    gitCommit = commits;
-    console.log(gitCommit[0].id)
-});
+module.exports = {
+    getCommits: function (callback) {
+        repo.commits("master", 300, callback);
+    }
+}
