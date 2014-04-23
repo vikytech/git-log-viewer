@@ -11,7 +11,9 @@ router.get('/', function (req, res) {
 });
 
 router.get('/commit', function (req, res) {
-    res.render('index', {hash: req.param("hash")});
+    var commitId = req.param("hash");
+    file.update(commitId);
+    res.render('index', {hash: commitId});
 });
 
 module.exports = router;
