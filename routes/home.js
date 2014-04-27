@@ -11,9 +11,14 @@ router.get('/', function (req, res) {
 });
 
 router.get('/commit', function (req, res) {
-    var commitId = req.param("hash");
-    file.update(commitId);
-    res.render('index', {hash: commitId});
+    var commitA = req.param("hash");
+    git.getParentCommit(commitA,
+        function (err, data) {
+            git.getDiff(commitA, data,
+                function (err, data) {
+                    res.render('index', {hash: data});
+                })
+        })
 });
 
 module.exports = router;

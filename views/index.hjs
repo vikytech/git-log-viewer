@@ -6,6 +6,6 @@
   </head>
   <body>
     <h1>{{ title }}</h1>
-    <p>Commit ID: {{ hash }}</p>
+    <p>Diff:<pre> {{ hash }} </pre></p>
   </body>
 </html>
