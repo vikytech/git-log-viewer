@@ -1,24 +1,19 @@
 var express = require('express');
 var router = express.Router();
-var git = require('../git.js');
-var file = require('../fileOperations.js');
+var service = require('../service.js');
 
 router.get('/', function (req, res) {
-    git.getCommits(function (result, commits) {
-        commitsWithStatus = file.write(commits);
+    service.getCommitsWithStatus(function (commitsWithStatus) {
         res.render('home', {commits: commitsWithStatus});
-    });
+    })
 });
 
 router.get('/commit', function (req, res) {
-    var commitA = req.param("hash");
-    git.getParentCommit(commitA,
-        function (err, data) {
-            git.getDiff(commitA, data,
-                function (err, data) {
-                    res.render('index', {hash: data});
-                })
-        })
+    var commitID = req.param("hash");
+
+    service.getGitDiff(commitID, function (diff) {
+        res.render('index', {hash: diff});
+    });
 });
 
 module.exports = router;

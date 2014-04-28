@@ -12,10 +12,10 @@ module.exports = {
         });
     },
     getParentCommit: function (commitId, callback) {
-        repo.commits("master", 300, function (err, commits) {
+        this.getCommits(function (err, commits) {
             callback(err, _.filter(commits, function (data) {
-                return data.id === commitId
+                return data.id == commitId
             })[0].parents()[0].id);
-        })
+        });
     }
 }
