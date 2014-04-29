@@ -3,18 +3,16 @@ var file = require('./fileOperations.js');
 
 module.exports = {
     getCommitsWithStatus: function (callback) {
-        git.getCommits(function (result, commits) {
+        git.getCommits(161, function (err, commits) {
             commitsWithStatus = file.write(commits);
+            console.log("Callback : " + commitsWithStatus);
             callback(commitsWithStatus);
         });
     },
 
     getGitDiff: function (commitID, callback) {
-        git.getParentCommit(commitID, function (err, data) {
-            git.getDiff(commitID, data,
-                function (err, data) {
-                    callback(data);
-                });
-        });
+        git.getDiff(commitID,function (err, data) {
+                callback(err,data);
+            });
     }
 }

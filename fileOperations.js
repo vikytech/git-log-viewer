@@ -9,7 +9,7 @@ module.exports = {
         fs.writeFile(FILE_NAME, "[");
 
         _.each(commits, function (commit) {
-            fs.appendFile(FILE_NAME, "{\"" + commit.id + "\" : " + "\"Unread\"" + "},");
+            fs.appendFile(FILE_NAME, "{\"" + commit.sha() + "\" : " + "\"Unread\"" + "},");
             commitWithStatus.push({commit: commit, status: "Unread"});
         });
 

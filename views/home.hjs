@@ -7,7 +7,7 @@
         {{#commits}}
         {{#commit}}
         <tr>
-            <td> <a href="/home/commit?hash={{commit.id}}">{{commit.message}} - {{status}}</a></td>
+            <td> <a href="/home/commit?hash={{commit.sha}}">{{commit.message}} - {{status}}</a></td>
         </tr>
         {{/commit}}
         {{/commits}}

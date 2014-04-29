@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 router.get('/commit', function (req, res) {
     var commitID = req.param("hash");
 
-    service.getGitDiff(commitID, function (diff) {
+    service.getGitDiff(commitID, function (err,diff) {
         res.render('index', {hash: diff});
     });
 });
