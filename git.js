@@ -1,6 +1,7 @@
+var _ = require('underscore')._;
 var repo = require('nodegit').Repo;
 var open = repo.open;
-var REPO_PATH = "/Users/prasantd/Documents/Work/Others/uno";
+var REPO_PATH = "/Users/vikytech/Copy/Git/Java/forum";
 
 module.exports = {
     getCommits: function (numOfCommits, callback) {
@@ -25,10 +26,10 @@ module.exports = {
         open(REPO_PATH, function (err, repo) {
             repo.getCommit(commitId, function (err, commit) {
                 commit.getDiff(function (err, diffList) {
-                    diffList.forEach(function (diff) {
-                        diff.patches().forEach(function (patch) {
+                    _.each(diffList, function (diff) {
+                        _.each(diff.patches(), function (patch) {
                             data += "\n diff", patch.oldFile().path(), patch.newFile().path();
-                            patch.hunks().forEach(function (hunk) {
+                            _.each(patch.hunks(), function (hunk) {
                                 data += "\n" + (hunk.header().trim());
                                 hunk.lines().forEach(function (line) {
                                     data += "\n" + String.fromCharCode(line.lineOrigin) + line.content.trim();

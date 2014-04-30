@@ -5,14 +5,13 @@ module.exports = {
     getCommitsWithStatus: function (callback) {
         git.getCommits(161, function (err, commits) {
             commitsWithStatus = file.write(commits);
-            console.log("Callback : " + commitsWithStatus);
             callback(commitsWithStatus);
         });
     },
 
     getGitDiff: function (commitID, callback) {
-        git.getDiff(commitID,function (err, data) {
-                callback(err,data);
-            });
+        git.getDiff(commitID, function (err, data) {
+            callback(err, data);
+        });
     }
 }

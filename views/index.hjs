@@ -6,6 +6,6 @@
   </head>
   <body>
     <h1>{{ title }}</h1>
-    <p>Diff:<pre> {{ hash }} </pre></p>
+    <pre> {{ hash }} </pre>
   </body>
 </html>
