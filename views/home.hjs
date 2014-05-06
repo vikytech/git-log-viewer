@@ -2,15 +2,13 @@
 <html>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   <body>
-  <table border=".5em" >
-  <th>Commits</th>
-        {{#commits}}
-        {{#commit}}
-        <tr>
-            <td> <a href="/home/commit?hash={{commit.sha}}">{{commit.message}} - {{status}}</a></td>
-        </tr>
-        {{/commit}}
-        {{/commits}}
-  </table>
+      <table>
+          <th>Commits</th>
+                {{#commits.commit}}
+                    <tr>
+                        <td> <a href="/home/commit?hash={{sha}}">{{message}}</a></td>
+                    </tr>
+                {{/commits.commit}}
+      </table>
   </body>
 </html>

@@ -1,11 +1,16 @@
 var git = require('./git.js');
-var file = require('./fileOperations.js');
+var file = require('./file.js');
+
+var commitsWithStatus = {};
 
 module.exports = {
     getCommitsWithStatus: function (callback) {
-        git.getCommits(161, function (err, commits) {
-            commitsWithStatus = file.write(commits);
-            callback(commitsWithStatus);
+        git.getCommits(100, function (err, commits) {
+            file.read(function (err, delimitedData) {
+                data = delimitedData.split(",");
+                commitsWithStatus = {commit: commits, readCommits: data };
+                callback(err, commitsWithStatus);
+            });
         });
     },
 
@@ -13,5 +18,9 @@ module.exports = {
         git.getDiff(commitID, function (err, data) {
             callback(err, data);
         });
+    },
+
+    updateReadCommit: function (commitId) {
+        file.update(commitId);
     }
 }

@@ -3,15 +3,15 @@ var router = express.Router();
 var service = require('../service.js');
 
 router.get('/', function (req, res) {
-    service.getCommitsWithStatus(function (commitsWithStatus) {
+    service.getCommitsWithStatus(function (err, commitsWithStatus) {
         res.render('home', {commits: commitsWithStatus});
     })
 });
 
 router.get('/commit', function (req, res) {
     var commitID = req.param("hash");
-
-    service.getGitDiff(commitID, function (err,diff) {
+    service.updateReadCommit(commitID)
+    service.getGitDiff(commitID, function (err, diff) {
         res.render('index', {hash: diff});
     });
 });

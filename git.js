@@ -10,8 +10,9 @@ module.exports = {
             repo.getMaster(function (err, branch) {
                 var history = branch.history();
                 var count = 0;
-                history.on("commit", function (commit) {
+                history.on("commit", function getCommit(commit) {
                     if (count++ >= numOfCommits) {
+                        history.removeListener("commit", getCommit);
                         callback(err, commits);
                         return;
                     }
@@ -38,7 +39,6 @@ module.exports = {
                         });
                     });
                     callback(err, data);
-                    return;
                 });
             });
         });
