@@ -3,11 +3,13 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   <body>
       <table>
-          <th>Commits</th>
-            {{#commits}}
-                <tr><td> <a class="{{status}}" href="/home/commit?hash={{sha}}">{{message}}</a></td>
-                </tr>
-            {{/commits}}
+          <th>Commits ({{commitsWithStatus.unreadCount}})</th>
+            {{#commitsWithStatus}}
+                {{#commits}}
+                    <tr><td><input type="checkbox"> <a class="{{status}}" href="/home/commit?hash={{sha}}">{{message}}</a></td>
+                    </tr>
+                {{/commits}}
+            {{/commitsWithStatus}}
       </table>
   </body>
 </html>

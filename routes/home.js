@@ -4,7 +4,7 @@ var service = require('../service.js');
 
 router.get('/', function (req, res) {
     service.getCommitsWithStatus(function (err, commitsWithStatus) {
-        res.render('home', {commits: commitsWithStatus});
+        res.render('home', {commitsWithStatus: commitsWithStatus});
     })
 });
 
