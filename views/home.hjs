@@ -4,11 +4,10 @@
   <body>
       <table>
           <th>Commits</th>
-                {{#commits.commit}}
-                    <tr>
-                        <td> <a href="/home/commit?hash={{sha}}">{{message}}</a></td>
-                    </tr>
-                {{/commits.commit}}
+            {{#commits}}
+                <tr><td> <a class="{{status}}" href="/home/commit?hash={{sha}}">{{message}}</a></td>
+                </tr>
+            {{/commits}}
       </table>
   </body>
 </html>

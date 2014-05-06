@@ -1,14 +1,18 @@
 var git = require('./git.js');
 var file = require('./file.js');
+var _ = require('underscore')._;
 
-var commitsWithStatus = {};
+var commitsWithStatus = [];
 
 module.exports = {
     getCommitsWithStatus: function (callback) {
         git.getCommits(100, function (err, commits) {
             file.read(function (err, delimitedData) {
                 data = delimitedData.split(",");
-                commitsWithStatus = {commit: commits, readCommits: data };
+                _.each(commits, function (commit) {
+                    commit.status = _.contains(data, commit.sha());
+                });
+                commitsWithStatus = commits;
                 callback(err, commitsWithStatus);
             });
         });
