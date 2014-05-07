@@ -4,12 +4,17 @@
   <body>
       <table>
           <th>Commits ({{commitsWithStatus.unreadCount}})</th>
+          <tbody>
             {{#commitsWithStatus}}
                 {{#commits}}
-                    <tr><td><input type="checkbox"> <a class="{{status}}" href="/home/commit?hash={{sha}}">{{message}}</a></td>
-                    </tr>
+                 <tr>
+                    <td>
+                        <a class="{{status}}" href="/home/commit?hash={{sha}}"><input type="checkbox"/> {{message}}</a>
+                    </td>
+                 </tr>
                 {{/commits}}
             {{/commitsWithStatus}}
+            </tbody>
       </table>
   </body>
 </html>

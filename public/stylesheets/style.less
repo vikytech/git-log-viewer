@@ -10,3 +10,49 @@ body {
 .true {
   color: #bf6a40;
 }
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-color: gray;
+}
+
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+  cursor: pointer;
+  border-color: gray;
+  color: #222;
+  background: rgba(255, 255, 255, .9);
+}
+
+td {
+  border-bottom: 1px #e5e5e5 solid;
+  empty-cells: show;
+  font-size: 90%;
+  cursor: pointer;
+  height: 2.83ex;
+  outline: none;
+  overflow: hidden;
+  padding: 3px 0 1px;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 2px;
+  background: transparent;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+a {
+  text-decoration: none;
+}
