@@ -5,7 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>{{ title }}</h1>
-    <pre> {{ hash }} </pre>
+    <a href="/home"><input type="button" value="Back"/></a>
+    <pre>   {{diff}}</pre>
   </body>
 </html>

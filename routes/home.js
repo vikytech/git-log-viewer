@@ -12,7 +12,7 @@ router.get('/commit', function (req, res) {
     var commitID = req.param("hash");
     service.updateReadCommit(commitID)
     service.getGitDiff(commitID, function (err, diff) {
-        res.render('index', {hash: diff});
+        res.render('index', {diff: diff});
     });
 });
 
