@@ -8,6 +8,11 @@ router.get('/', function (req, res) {
     })
 });
 
+router.post('/addRepo',function(req,res){
+    var repoPath=req.body.repoPath;
+    var repoLabel=req.body.repoLabel;
+});
+
 router.get('/commit', function (req, res) {
     var commitID = req.param("hash");
     service.updateReadCommit(commitID)
