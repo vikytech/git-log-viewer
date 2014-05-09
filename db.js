@@ -5,7 +5,7 @@ var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database(file);
 
 if (!exists) {
-    console.log("Creating DB file.");
+    console.log("Creating DB .......");
     fs.openSync(file, "w");
 }
 
@@ -13,6 +13,7 @@ if (!exists) {
 db.serialize(function () {
     if (!exists) {
         db.run("CREATE TABLE read_commit (sha TEXT, UNIQUE(sha) ON CONFLICT REPLACE)");
+        db.run("CREATE TABLE repos (repoLabel TEXT,repoPath TEXT) ");
     }
 });
 
@@ -31,6 +32,14 @@ module.exports = {
         var stmt = db.prepare("INSERT INTO read_commit VALUES (?)");
         db.serialize(function () {
             stmt.run(commitId);
+            stmt.finalize();
+        });
+    },
+
+    addRepo: function (repoLabel, repoPath) {
+        var stmt = db.prepare("INSERT INTO repos VALUES (?,?)");
+        db.serialize(function () {
+            stmt.run(repoLabel, repoPath);
             stmt.finalize();
         });
     }

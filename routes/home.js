@@ -8,9 +8,10 @@ router.get('/', function (req, res) {
     })
 });
 
-router.post('/addRepo',function(req,res){
-    var repoPath=req.body.repoPath;
-    var repoLabel=req.body.repoLabel;
+router.post('/addRepo', function (req, res) {
+    var repoLabel = req.param("repoLabel");
+    var repoPath = req.param("repoPath");
+    service.registerRepo(repoLabel, repoPath);
 });
 
 router.get('/commit', function (req, res) {

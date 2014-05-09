@@ -1,6 +1,5 @@
 var git = require('./git.js');
 var db = require('./db.js');
-var _ = require('underscore')._;
 
 module.exports = {
     getCommitsWithStatus: function (callback) {
@@ -24,5 +23,9 @@ module.exports = {
 
     updateReadCommit: function (commitId) {
         db.update(commitId);
+    },
+
+    registerRepo: function (repoLabel, repoPath) {
+        db.addRepo(repoLabel, repoPath)
     }
 }
