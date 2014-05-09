@@ -1,13 +1,13 @@
 var fs = require('fs');
 var _ = require('underscore')._;
-var FILE_NAME = "status.txt";
+var READ_COMMITS = "readCommits.txt";
 
 commitWithStatus = [];
 
 module.exports = {
 
     read: function (callback) {
-        fs.readFile(FILE_NAME, 'utf8', function (err, data) {
+        fs.readFile(READ_COMMITS, 'utf8', function (err, data) {
             callback(err, data);
         });
     },
@@ -16,7 +16,7 @@ module.exports = {
         this.read(function (err, delimitedData) {
             var data = delimitedData.split(",");
             if (!_.contains(data, commitId)) {
-                fs.appendFile(FILE_NAME, "," + commitId);
+                fs.appendFile(READ_COMMITS, "," + commitId);
             }
         });
     }
