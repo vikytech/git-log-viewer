@@ -1,23 +1,16 @@
 var git = require('./git.js');
-var file = require('./file.js');
-var _ = require('underscore')._;
-
-var commitsWithStatus = {};
+var db = require('./db.js');
 
 module.exports = {
     getCommitsWithStatus: function (callback) {
         git.getCommits(100, function (err, commits) {
-            file.read(function (err, delimitedData) {
-                data = delimitedData.split(",");
-                var count = 0;
-                _.each(commits, function (commit) {
-                    commit.status = _.contains(data, commit.sha());
-                    if (!commit.status) {
-                        count++;
-                    }
+            db.read(function (err, data) {
+                commits.forEach(function (commit) {
+                    var isCommitRead = data.indexOf(commit.sha()) != -1;
+                    commit.status = isCommitRead ? true : false;
                 });
-                commitsWithStatus = {commits: commits, unreadCount: count};
-                callback(err, commitsWithStatus);
+                count = commits.length - data.length;
+                callback(err, {commits: commits, totalUnReadCommits: count});
             });
         });
     },
@@ -29,6 +22,10 @@ module.exports = {
     },
 
     updateReadCommit: function (commitId) {
-        file.update(commitId);
+        db.update(commitId);
+    },
+
+    registerRepo: function (repoLabel, repoPath) {
+        db.addRepo(repoLabel, repoPath)
     }
 }

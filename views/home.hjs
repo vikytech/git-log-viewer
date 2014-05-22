@@ -17,7 +17,7 @@
          <input type="button" id="addRepo" value="Add Repository"/>
       </div>
       <table>
-         <th>Commits ({{commitsWithStatus.unreadCount}})</th>
+         <th>Commits ({{commitsWithStatus.totalUnReadCommits}})</th>
          <tbody>
             {{#commitsWithStatus}}
             {{#commits}}

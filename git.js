@@ -7,7 +7,7 @@ module.exports = {
     getCommits: function (numOfCommits, callback) {
         var commits = [];
         open(REPO_PATH, function (err, repo) {
-            repo.getMaster(function (err, branch) {
+            repo.getBranch("master", function (err, branch) {
                 var history = branch.history();
                 var count = 0;
                 history.on("commit", function getCommit(commit) {
