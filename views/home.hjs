@@ -9,12 +9,12 @@
    <body>
       <div id="statusArea"></div>
       <div id="repoAddPopUp">
-         <input type="text" id="repoPath" placeholder="Repository Path"/>
-         <input type="text" id="repoLabel" placeholder="Label Name"/>
-             <input type="button" id="AddRepoAndLabel" value="Add"/>
+         <input type="text" class="inputBox" id="repoPath" placeholder="Repository Path"/>
+         <input type="text" class="inputBox" id="repoLabel" placeholder="Label Name"/>
+             <input type="button" id="addRepoAndLabel" value="Add"/>
       </div>
       <div class="footer">
-         <input type="button" id="AddRepo" value="Add Repository"/>
+         <input type="button" id="addRepo" value="Add Repository"/>
       </div>
       <table>
          <th>Commits ({{commitsWithStatus.unreadCount}})</th>

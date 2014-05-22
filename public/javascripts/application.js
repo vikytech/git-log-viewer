@@ -1,9 +1,9 @@
 $(function () {
     $("#repoAddPopUp").dialog({autoOpen: false});
-    $("#AddRepo").click(function () {
+    $("#addRepo").click(function () {
         $("#repoAddPopUp").dialog("open");
     })
-    $("#AddRepoAndLabel")
+    $("#addRepoAndLabel")
         .click(
         function () {
             $.ajax({
