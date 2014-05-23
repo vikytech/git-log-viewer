@@ -18,7 +18,7 @@ db.serialize(function () {
 });
 
 module.exports = {
-    read: function (callback) {
+    readCommits: function (callback) {
         db.all("SELECT sha FROM read_commit", function (err, all) {
             var commitsIds = all.map(function (commit) {
                 return commit.sha;
@@ -42,6 +42,11 @@ module.exports = {
             stmt.run(repoLabel, repoPath);
             stmt.finalize();
         });
+    },
+    readAllRepos:function(callback){
+      db.all("SELECT * FROM repos",function(err,repos){
+            callback(err,repos);
+      })
     }
 }
 

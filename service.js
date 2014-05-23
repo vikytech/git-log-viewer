@@ -4,13 +4,15 @@ var db = require('./db.js');
 module.exports = {
     getCommitsWithStatus: function (callback) {
         git.getCommits(100, function (err, commits) {
-            db.read(function (err, data) {
+            db.readCommits(function (err, data) {
                 commits.forEach(function (commit) {
                     var isCommitRead = data.indexOf(commit.sha()) != -1;
                     commit.status = isCommitRead ? true : false;
                 });
                 count = commits.length - data.length;
-                callback(err, {commits: commits, totalUnReadCommits: count});
+                db.readAllRepos(function(err,repos){
+                    callback(err, {commits: commits, totalUnReadCommits: count, repos:repos});
+                });
             });
         });
     },
@@ -27,5 +29,8 @@ module.exports = {
 
     registerRepo: function (repoLabel, repoPath) {
         db.addRepo(repoLabel, repoPath)
+    },
+    getAllRepos: function(callback){
+        db.readAllRepos(callback);
     }
 }
