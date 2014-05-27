@@ -16,7 +16,9 @@
            <div id="leftPanel">
                 <div class="heading">Repositories</div>
                 {{#commitsWithStatus.repos}}
-                    <div class="label">{{repoLabel}}</div>
+                    <div class="label">
+                        <a href="/home/repo?path={{repoPath}}&branch={{branchName}}">{{repoLabel}}</a>
+                    </div>
                 {{/commitsWithStatus.repos}}
            </div>
 
@@ -25,7 +27,8 @@
               <div id="repoAddPopUp">
                  <input type="text" class="inputBox" id="repoPath" placeholder="Repository Path"/>
                  <input type="text" class="inputBox" id="repoLabel" placeholder="Label Name"/>
-                     <input type="button" id="addRepoAndLabel" value="Add"/>
+                 <input type="text" class="inputBox" id="branchName" placeholder="Branch Name"/>
+                 <input type="button" id="addRepoAndLabel" value="Add"/>
               </div>
               <table>
                  <th>Commits ({{commitsWithStatus.totalUnReadCommits}})</th>
@@ -34,7 +37,7 @@
                     {{#commits}}
                     <tr>
                        <td>
-                          <a class="{{status}}" href="/home/commit?hash={{sha}}"><input type="checkbox"/> {{message}}</a>
+                          <a class="{{status}}" href="/home/commit?hash={{sha}}&path={{commitsWithStatus.currentRepoPath}}"><input type="checkbox"/> {{message}}</a>
                        </td>
                     </tr>
                     {{/commits}}

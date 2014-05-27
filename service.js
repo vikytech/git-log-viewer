@@ -2,8 +2,8 @@ var git = require('./git.js');
 var db = require('./db.js');
 
 module.exports = {
-    getCommitsWithStatus: function (callback) {
-        git.getCommits(100, function (err, commits) {
+    getCommitsWithStatus: function (repoPath,branch,callback) {
+        git.getCommits(repoPath,branch,100, function (err, commits) {
             db.readCommits(function (err, data) {
                 commits.forEach(function (commit) {
                     var isCommitRead = data.indexOf(commit.sha()) != -1;
@@ -11,14 +11,14 @@ module.exports = {
                 });
                 count = commits.length - data.length;
                 db.readAllRepos(function(err,repos){
-                    callback(err, {commits: commits, totalUnReadCommits: count, repos:repos});
+                    callback(err, {commits: commits, totalUnReadCommits: count, repos:repos, currentRepoPath:repoPath});
                 });
             });
         });
     },
 
-    getGitDiff: function (commitID, callback) {
-        git.getDiff(commitID, function (err, data) {
+    getGitDiff: function (commitID, repoPath, callback) {
+        git.getDiff(commitID, repoPath, function (err, data) {
             callback(err, data);
         });
     },
@@ -27,9 +27,10 @@ module.exports = {
         db.update(commitId);
     },
 
-    registerRepo: function (repoLabel, repoPath) {
-        db.addRepo(repoLabel, repoPath)
+    registerRepo: function (repoLabel, repoPath, branchName) {
+        db.addRepo(repoLabel, repoPath, branchName)
     },
+
     getAllRepos: function(callback){
         db.readAllRepos(callback);
     }

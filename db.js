@@ -13,7 +13,7 @@ if (!exists) {
 db.serialize(function () {
     if (!exists) {
         db.run("CREATE TABLE read_commit (sha TEXT, UNIQUE(sha) ON CONFLICT REPLACE)");
-        db.run("CREATE TABLE repos (repoLabel TEXT,repoPath TEXT) ");
+        db.run("CREATE TABLE repos (repoLabel TEXT,repoPath TEXT,branchName TEXT) ");
     }
 });
 
@@ -36,10 +36,10 @@ module.exports = {
         });
     },
 
-    addRepo: function (repoLabel, repoPath) {
-        var stmt = db.prepare("INSERT INTO repos VALUES (?,?)");
+    addRepo: function (repoLabel, repoPath, branchName) {
+        var stmt = db.prepare("INSERT INTO repos VALUES (?,?,?)");
         db.serialize(function () {
-            stmt.run(repoLabel, repoPath);
+            stmt.run(repoLabel, repoPath, branchName);
             stmt.finalize();
         });
     },
