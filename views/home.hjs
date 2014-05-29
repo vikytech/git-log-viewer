@@ -17,7 +17,7 @@
                 <div class="heading">Repositories</div>
                 {{#commitsWithStatus.repos}}
                     <div class="label">
-                        <a href="/home/repo?path={{repoPath}}&branch={{branchName}}">{{repoLabel}}</a>
+                        <a href="/home/repo?path={{repoPath}}&branch={{branchName}}">{{repoLabel}}({{unreadCommitsCount}})</a>
                     </div>
                 {{/commitsWithStatus.repos}}
            </div>

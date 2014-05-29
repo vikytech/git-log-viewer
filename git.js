@@ -3,7 +3,7 @@ var repo = require('nodegit').Repo;
 var open = repo.open;
 
 module.exports = {
-    getCommits: function (repoPath,branch,numOfCommits, callback) {
+    getCommits: function (repoPath, branch, numOfCommits, callback) {
         var commits = [];
         open(repoPath, function (err, repo) {
             repo.getBranch(branch, function (err, branch) {
@@ -21,7 +21,7 @@ module.exports = {
             });
         });
     },
-    getDiff: function (commitId,repoPath, callback) {
+    getDiff: function (commitId, repoPath, callback) {
         var data = "";
         open(repoPath, function (err, repo) {
             repo.getCommit(commitId, function (err, commit) {
@@ -41,5 +41,22 @@ module.exports = {
                 });
             });
         });
+    },
+    getReposUnreadCommitCount: function (repos, readCommits, callback) {
+        var result = [];
+        var i = 1;
+        _.each(repos, function (repo) {
+            module.exports.getCommits(repo.repoPath, repo.branchName, 100, function (err, commits) {
+                var count = _.filter(commits,function (commit) {
+                    return  !_.contains(readCommits, commit.sha());
+                }).length;
+                repo.unreadCommitsCount = count;
+                result.push(repo);
+                if (i == repos.length) {
+                    callback(err, result);
+                }
+                i++;
+            })
+        })
     }
 }
